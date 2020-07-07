@@ -29,3 +29,19 @@ function main () {
 }
 
 main();
+
+/*
+
+Edge Logic Pseudocode
+
+0  1  2  3
+4  5  6  7
+8  9  10 11
+12 13 14 15
+
+0 is always top left
+15 is always bottom right
+gridSize - square root of gridSize is bottom left
+0 + square root of gridSize is top right
+
+*/
