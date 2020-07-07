@@ -32,7 +32,7 @@ function generateContainers (gridSize,sketchContainer,individualContainer) {
 }
 
 function main () {
-    let gridSize = 25;
+    let gridSize = 400;
     const sketchContainer = document.querySelector('.sketch-container');
     const individualContainer = document.createElement('div');
     individualContainer.classList.add('individual-container');
@@ -57,5 +57,10 @@ Edge Logic Pseudocode
 gridSize - 1 is always bottom right
 gridSize - square root of gridSize is bottom left
 0 + square root of gridSize is top right
+
+-------------------------------------------------
+
+Should make grid out of square numbers only, minimum of 16
+Should use an automatically generated slider up to a high amount maybe.
 
 */
