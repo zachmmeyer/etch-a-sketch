@@ -14,19 +14,19 @@ function generateContainers (gridSize,sketchContainer,individualContainer) {
     for (let i = 0; i < gridSize; i++) {
         sketchContainer.appendChild(individualContainer.cloneNode(true));
         //sketchContainer.childNodes[i].setAttribute('data-key', `${i}`);
-        sketchContainer.childNodes[i].classList.add(`${i}`)
-        // if (sketchContainer.childNodes[i].classList.contains('0')){
-        //     sketchContainer.childNodes[i].classList.add('top-left-corner');
-        // }
-        // if (sketchContainer.childNodes[i].classList.contains(gridSize-1)) {
-        //     sketchContainer.childNodes[i].classList.add('bottom-right-corner');
-        // }
-        // if (sketchContainer.childNodes[i].classList.contains(gridSize-(Math.sqrt(gridSize)))) {
-        //    sketchContainer.childNodes[i].classList.add('bottom-left-corner')
-        // }
-        // if (sketchContainer.childNodes[i].classList.contains(Math.sqrt(gridSize)-1)) {
-        //     sketchContainer.childNodes[i].classList.add('top-right-corner');
-        // }
+        sketchContainer.childNodes[i].classList.add(`${i}`);
+        if (sketchContainer.childNodes[i].classList.contains('0')){
+            sketchContainer.childNodes[i].classList.add('top-left-corner');
+        }
+        if (sketchContainer.childNodes[i].classList.contains(gridSize-1)) {
+            sketchContainer.childNodes[i].classList.add('bottom-right-corner');
+        }
+        if (sketchContainer.childNodes[i].classList.contains(gridSize-(Math.sqrt(gridSize)))) {
+           sketchContainer.childNodes[i].classList.add('bottom-left-corner')
+        }
+        if (sketchContainer.childNodes[i].classList.contains(Math.sqrt(gridSize)-1)) {
+            sketchContainer.childNodes[i].classList.add('top-right-corner');
+        }
     }
     return;
 }
@@ -44,6 +44,10 @@ function main () {
 main();
 
 /*
+
+All borders are now 2px, except the outer walls. Easy enough to do with math.
+
+-------------------------------------------------
 
 Use a table you idiot
 
