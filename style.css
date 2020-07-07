@@ -1,0 +1,15 @@
+.sketch_container {
+    width: 600px;
+    height: 600px;
+    display:grid;
+}
+
+.individual_container {
+    border: 1px solid black;
+}
+
+/*  
+    Add different borders for inside squares using math or something, currently 5px is doubling up everywhere but outside
+    4 corners, top, bottom and sides excluding corners, and inner containers all should have different borders
+
+/*
