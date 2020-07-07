@@ -1,29 +1,29 @@
-.sketch_container {
+.sketch-container {
     width: 600px;
     height: 600px;
     display:grid;
 }
 
-.individual_container {
+.individual-container {
     border: 1px solid black;
 }
 
-.top_left_corner {
+.top-left-corner {
     border-bottom: none;
     border-right: none;
 }
 
-.top_right_corner {
+.top-right-corner {
     border-bottom: none;
     border-left: none;
 }
 
-.bottom_left_corner {
+.bottom-left-corner {
     border-top: none;
     border-right: none;
 }
 
-.bottom_right_corner {
+.bottom-right-corner {
     border-top: none;
     border-left: none;
 }
