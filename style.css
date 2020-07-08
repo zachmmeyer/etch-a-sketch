@@ -11,21 +11,21 @@
 }
 
 .top-left-corner {
-    border-top: 2px solid black;
-    border-left: 2px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .top-right-corner {
-    border-right: 2px solid black;
-    border-top: 2px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .bottom-left-corner {
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .bottom-right-corner {
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
 }
