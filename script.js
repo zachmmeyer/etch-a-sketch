@@ -30,21 +30,30 @@ function gridTemplateString (gridSize) {
     return gridString;
 }
 
-function gridArrayFill (gridSize) {
-    let gridArray = [];
-    let mdArray = [];
+function borderHandler (gridSize,sketchContainer) {
     const gridSizeRt = Math.sqrt(gridSize);
+    let leftNum = 0;
+    let rightNum = 0;
     for (let i = 0; i < gridSize; i++) {
-        gridArray.push(i);
-        if (gridArray.length == gridSizeRt) {
-            mdArray.push(gridArray.splice(0,gridSizeRt));
+        leftNum++;
+        rightNum++;
+        if (leftNum == gridSizeRt && sketchContainer.childNodes[i+1] != undefined) {
+            sketchContainer.childNodes[i+1].classList.add('left-side');
+            leftNum = 0;
+        }
+        if ((rightNum == gridSizeRt) && (sketchContainer.childNodes[i] != gridSize) && (sketchContainer.childNodes[i] != gridSizeRt-1)) {
+            sketchContainer.childNodes[i].classList.add('right-side');
+            rightNum = 0;
         }
     }
-    return mdArray;
-}
-
-function borderHandler (gridArray) {
-    
+    for (let i = 0; i < gridSizeRt; i++) {
+        if(i != 0 && i != gridSizeRt) {
+            sketchContainer.childNodes[i].classList.add('top-side');
+        }
+    }
+    for (let i = gridSize-1;i > (gridSize-1)-gridSizeRt; i--) {
+        sketchContainer.childNodes[i].classList.add('bottom-side');
+    }
 }
 
 function main () {
@@ -55,27 +64,13 @@ function main () {
     const newGridSize = gridTemplateString(gridSize);
     sketchContainer.setAttribute('style', `grid-template-columns: ${newGridSize}; grid-template-rows: ${newGridSize};`);
     generateContainers(gridSize,sketchContainer,individualContainer);
-    const gridArray = gridArrayFill(gridSize);
-    borderHandler(gridArray);
+    borderHandler(gridSize,sketchContainer);
 }
 
 main();
 
 /*
 
-0  1  2  3  4  5
-6  7  8  9  10 11
-12 13 14 15 16 17
-18 19 20 21 22 23
-24 25 26 27 28 29
-30 31 32 33 34 35
-
-
-
 Slider range 4 - 30, number picked is grid size.
-
--------------------------------------------------
-
-All borders are now 2px, except the outer walls. Easy enough to do with math.
 
 */
