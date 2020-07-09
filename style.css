@@ -1,48 +1,46 @@
 .sketch-container {
-    width: 600px;
-    height: 600px;
-    display:grid;
-    
+  width: 600px;
+  height: 600px;
+  display: grid;
 }
 
 .individual-container {
-    border: 1px solid black;
-    box-sizing: border-box;
+  border: 1px solid black;
+  box-sizing: border-box;
 }
 
 .top-left-corner {
-    border-top: 2px solid black;
-    border-left: 2px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .top-right-corner {
-    border-top: 2px solid black;
-    border-right: 2px solid black;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .bottom-left-corner {
-    border-bottom: 2px solid black;
-    border-left: 2px solid black;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .bottom-right-corner {
-    border-bottom: 2px solid black;
-    border-right: 2px solid black;
-    
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .left-side {
-    border-left: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .top-side {
-    border-top: 2px solid black;
+  border-top: 2px solid black;
 }
 
 .right-side {
-    border-right: 2px solid black;
+  border-right: 2px solid black;
 }
 
 .bottom-side {
-    border-bottom: 2px solid black;
+  border-bottom: 2px solid black;
 }
