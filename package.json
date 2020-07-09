@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/zachmmeyer/etch-a-sketch#readme",
   "devDependencies": {
-    "eslint": "^7.4.0"
-  },
-  "dependencies": {}
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
 }
