@@ -85,7 +85,5 @@ function main() {
 main();
 
 /*
-
-Slider range 4 - 30, number picked is grid size.
-
+  TODO: Slider range 4 - 30, number picked is grid size.
 */
