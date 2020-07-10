@@ -43,16 +43,16 @@ function borderHandler(gridSize, sketchContainer) {
     leftNum += 1;
     rightNum += 1;
     if (
-      leftNum === gridSizeRt &&
-      sketchContainer.childNodes[i + 1] !== undefined
+      leftNum === gridSizeRt
+      && sketchContainer.childNodes[i + 1] !== undefined
     ) {
       sketchContainer.childNodes[i + 1].classList.add('left-side');
       leftNum = 0;
     }
     if (
-      rightNum === gridSizeRt &&
-      sketchContainer.childNodes[i] !== gridSize &&
-      sketchContainer.childNodes[i] !== gridSizeRt - 1
+      rightNum === gridSizeRt
+      && sketchContainer.childNodes[i] !== gridSize
+      && sketchContainer.childNodes[i] !== gridSizeRt - 1
     ) {
       sketchContainer.childNodes[i].classList.add('right-side');
       rightNum = 0;
