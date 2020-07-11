@@ -1,3 +1,10 @@
+.slide-container {
+  width: 600px;
+}
+
+.slider {
+  width: 100%;
+}
 .sketch-container {
   width: 600px;
   height: 600px;
