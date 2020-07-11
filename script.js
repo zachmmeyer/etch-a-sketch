@@ -68,8 +68,7 @@ function borderHandler(gridSize, sketchContainer) {
   }
 }
 
-function resizeGrid() {
-  const gridSize = 36;
+function resizeGrid(gridSize) {
   const sketchContainer = document.querySelector('.sketch-container');
   const individualContainer = document.createElement('div');
   individualContainer.classList.add('individual-container');
@@ -83,12 +82,15 @@ function resizeGrid() {
 }
 
 function main() {
-  resizeGrid();
+  const gridSize = 16;
+  resizeGrid(gridSize);
+  const slider = document.querySelector('.slider');
+  slider.addEventListener('input', function (e) {
+    resizeGrid(Math.pow((e.target.value), 2));
+  });
 }
 
 main();
 
-/*
-  TODO: Add Event Listener for moving slider.
-  TODO: Attach slider to gridSize. Run resize on slider on move. Sq slider value to get gridSize.
-*/
+// TODO: Clear existing grid before resize.
+// TODO: Attach slider to gridSize. Run resize on slider on move. Sq slider value to get gridSize.
