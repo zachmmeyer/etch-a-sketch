@@ -68,7 +68,7 @@ function borderHandler(gridSize, sketchContainer) {
   }
 }
 
-function main() {
+function resizeGrid() {
   const gridSize = 36;
   const sketchContainer = document.querySelector('.sketch-container');
   const individualContainer = document.createElement('div');
@@ -82,8 +82,13 @@ function main() {
   borderHandler(gridSize, sketchContainer);
 }
 
+function main() {
+  resizeGrid();
+}
+
 main();
 
 /*
-  TODO: Slider range 4 - 30, number picked is grid size.
+  TODO: Add Event Listener for moving slider.
+  TODO: Attach slider to gridSize. Run resize on slider on move. Sq slider value to get gridSize.
 */
