@@ -86,7 +86,8 @@ function main() {
   resizeGrid(gridSize);
   const slider = document.querySelector('.slider');
   slider.addEventListener('input', (e) => {
-    resizeGrid(e.target.value ** e.target.value);
+    const squaredInput = e.target.value * e.target.value;
+    resizeGrid(squaredInput);
   });
 }
 
