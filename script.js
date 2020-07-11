@@ -86,7 +86,7 @@ function main() {
   resizeGrid(gridSize);
   const slider = document.querySelector('.slider');
   slider.addEventListener('input', (e) => {
-    resizeGrid((e.target.value ** e.target.value));
+    resizeGrid(e.target.value ** e.target.value);
   });
 }
 
@@ -95,3 +95,4 @@ main();
 // TODO: Clear existing grid before resize with new function.
 // TODO: Attach slider to gridSize. Run resize on slider on move. Sq slider value to get gridSize.
 // TODO: Optimize function generateContainers.
+// TODO: Set range to default on refresh via main function.
