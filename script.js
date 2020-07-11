@@ -85,12 +85,13 @@ function main() {
   const gridSize = 16;
   resizeGrid(gridSize);
   const slider = document.querySelector('.slider');
-  slider.addEventListener('input', function (e) {
-    resizeGrid(Math.pow((e.target.value), 2));
+  slider.addEventListener('input', (e) => {
+    resizeGrid((e.target.value ** e.target.value));
   });
 }
 
 main();
 
-// TODO: Clear existing grid before resize.
+// TODO: Clear existing grid before resize with new function.
 // TODO: Attach slider to gridSize. Run resize on slider on move. Sq slider value to get gridSize.
+// TODO: Optimize function generateContainers.
