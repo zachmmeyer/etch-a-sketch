@@ -1,24 +1,23 @@
 function generateContainers(gridSize, sketchContainer, individualContainer) {
   for (let i = 0; i < gridSize; i += 1) {
     sketchContainer.appendChild(individualContainer.cloneNode(true));
-    sketchContainer.childNodes[i].classList.add(`${i}`);
-    if (sketchContainer.childNodes[i].classList.contains('0')) {
-      sketchContainer.childNodes[i].classList.add('top-left-corner');
-    }
-    if (sketchContainer.childNodes[i].classList.contains(gridSize - 1)) {
-      sketchContainer.childNodes[i].classList.add('bottom-right-corner');
-    }
-    if (
-      sketchContainer.childNodes[i].classList.contains(
-        gridSize - Math.sqrt(gridSize),
-      )
-    ) {
-      sketchContainer.childNodes[i].classList.add('bottom-left-corner');
-    }
-    if (
-      sketchContainer.childNodes[i].classList.contains(Math.sqrt(gridSize) - 1)
-    ) {
-      sketchContainer.childNodes[i].classList.add('top-right-corner');
+    const SKETCHCONTAINER = sketchContainer.childNodes[i].classList;
+    SKETCHCONTAINER.add(`${i}`);
+    switch (true) {
+      case SKETCHCONTAINER.contains('0'):
+        SKETCHCONTAINER.add('top-left-corner');
+        break;
+      case SKETCHCONTAINER.contains(gridSize - 1):
+        SKETCHCONTAINER.add('bottom-right-corner');
+        break;
+      case SKETCHCONTAINER.contains(gridSize - Math.sqrt(gridSize)):
+        SKETCHCONTAINER.add('bottom-left-corner');
+        break;
+      case SKETCHCONTAINER.contains(Math.sqrt(gridSize) - 1):
+        SKETCHCONTAINER.add('top-right-corner');
+        break;
+      default:
+        break;
     }
   }
 }
@@ -39,12 +38,14 @@ function borderHandler(gridSize, sketchContainer) {
   const gridSizeRt = Math.sqrt(gridSize);
   let leftNum = 0;
   let rightNum = 0;
+  const gridSizeMinusOne = gridSize - 1;
   for (let i = 0; i < gridSize; i += 1) {
     leftNum += 1;
     rightNum += 1;
     if (
       leftNum === gridSizeRt
       && sketchContainer.childNodes[i + 1] !== undefined
+      && i !== gridSizeMinusOne - gridSizeRt
     ) {
       sketchContainer.childNodes[i + 1].classList.add('left-side');
       leftNum = 0;
@@ -53,18 +54,40 @@ function borderHandler(gridSize, sketchContainer) {
       rightNum === gridSizeRt
       && sketchContainer.childNodes[i] !== gridSize
       && sketchContainer.childNodes[i] !== gridSizeRt - 1
+      && !sketchContainer.childNodes[i].classList.contains('bottom-right-corner')
     ) {
       sketchContainer.childNodes[i].classList.add('right-side');
       rightNum = 0;
     }
   }
   for (let i = 0; i < gridSizeRt; i += 1) {
-    if (i !== 0 && i !== gridSizeRt) {
-      sketchContainer.childNodes[i].classList.add('top-side');
+    const SKETCHCONTAINER = sketchContainer.childNodes[i].classList;
+    if (
+      i !== 0
+      && i !== gridSizeRt
+      && !SKETCHCONTAINER.contains('top-right-corner')
+    ) {
+      SKETCHCONTAINER.add('top-side');
     }
   }
-  for (let i = gridSize - 1; i > gridSize - 1 - gridSizeRt; i -= 1) {
-    sketchContainer.childNodes[i].classList.add('bottom-side');
+  for (let i = gridSizeMinusOne; i > gridSizeMinusOne - gridSizeRt; i -= 1) {
+    const SKETCHCONTAINER = sketchContainer.childNodes[i].classList;
+    if (
+      i !== gridSize - gridSizeRt
+      && !SKETCHCONTAINER.contains('bottom-right-corner')
+      && !SKETCHCONTAINER.contains('bottom-left-corner')
+    ) {
+      SKETCHCONTAINER.add('bottom-side');
+    }
+  }
+}
+
+function gridCleaner(sketchContainer) {
+  if (sketchContainer.childNodes.length === undefined) {
+    return;
+  }
+  while (sketchContainer.childNodes.length > 0) {
+    sketchContainer.childNodes[0].remove();
   }
 }
 
@@ -73,6 +96,7 @@ function resizeGrid(gridSize) {
   const individualContainer = document.createElement('div');
   individualContainer.classList.add('individual-container');
   const newGridSize = gridTemplateString(gridSize);
+  gridCleaner(sketchContainer);
   sketchContainer.setAttribute(
     'style',
     `grid-template-columns: ${newGridSize}; grid-template-rows: ${newGridSize};`,
@@ -93,7 +117,6 @@ function main() {
 
 main();
 
-// TODO: Clear existing grid before resize with new function.
-// TODO: Attach slider to gridSize. Run resize on slider on move. Sq slider value to get gridSize.
-// TODO: Optimize function generateContainers.
 // TODO: Set range to default on refresh via main function.
+// TODO: Take closer look at borderHandler to possibly optimize better.
+// TODO: Add button to toggle grid on and off.
