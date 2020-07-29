@@ -117,6 +117,5 @@ function main() {
 
 main();
 
-// TODO: Set range to default on refresh via main function.
 // TODO: Take closer look at borderHandler to possibly optimize better.
 // TODO: Add button to toggle grid on and off.
