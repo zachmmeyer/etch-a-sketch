@@ -107,34 +107,29 @@ function resizeGrid(gridSize) {
 
 function paintContainers() {
   const containers = document.querySelectorAll('.individual-container');
+  const button = document.querySelector('.clear-grid');
   for (const container of containers) {
-    container.addEventListener('mousemove', () => {
-      container.classList.add('black');
+    let backgroundOpacity = 0.1;
+    container.addEventListener('mouseover', () => {
+      container.style.backgroundColor = `rgba(0,0,0,${backgroundOpacity})`;
+      backgroundOpacity += 0.1;
+    });
+    button.addEventListener('click', () => {
+      container.style.backgroundColor = 'rgba(0,0,0,0)';
+      backgroundOpacity = 0.1;
     });
   }
-}
-
-function clearGrid() {
-  const button = document.querySelector('.clear-grid');
-  button.addEventListener('click', () => {
-    const containers = document.querySelectorAll('.individual-container');
-    for (const container of containers) {
-      container.classList.remove('black');
-    }
-  });
 }
 
 function main() {
   const gridSize = 16;
   resizeGrid(gridSize);
   paintContainers();
-  clearGrid();
   const slider = document.querySelector('.slider');
   slider.addEventListener('input', (e) => {
     const squaredInput = e.target.value * e.target.value;
     resizeGrid(squaredInput);
     paintContainers();
-    clearGrid();
   });
 }
 
