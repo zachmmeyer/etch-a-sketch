@@ -51,3 +51,7 @@
 .bottom-side {
   border-bottom: 2px solid black;
 }
+
+.black {
+  background-color: black;
+}
