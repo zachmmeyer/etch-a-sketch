@@ -135,5 +135,6 @@ function main() {
 
 main();
 
+// TODO: Rainbow button
 // TODO: Take closer look at borderHandler to possibly optimize better.
 // TODO: Add button to toggle grid on and off.
