@@ -105,16 +105,42 @@ function resizeGrid(gridSize) {
   borderHandler(gridSize, sketchContainer);
 }
 
+function randomColor() {
+  return Math.floor(Math.random() * 256);
+}
+
 function paintContainers() {
+  let rgbDrawBool = false;
+  let blackDrawBool = true;
   const containers = document.querySelectorAll('.individual-container');
-  const button = document.querySelector('.clear-grid');
+  const clearGrid = document.querySelector('.clear-grid');
+  const rgbDraw = document.querySelector('.rainbow-draw');
+  const blackDraw = document.querySelector('.black-draw');
+  const colorSelectionText = document.querySelector('.color-selection');
   for (const container of containers) {
     let backgroundOpacity = 0.1;
     container.addEventListener('mouseover', () => {
-      container.style.backgroundColor = `rgba(0,0,0,${backgroundOpacity})`;
-      backgroundOpacity += 0.1;
+      rgbDraw.addEventListener('click', () => {
+        colorSelectionText.innerHTML = 'Color Selection: Rainbow';
+        container.style.backgroundColor = 'rgba(0,0,0,0)';
+        blackDrawBool = false;
+        rgbDrawBool = true;
+      });
+      blackDraw.addEventListener('click', () => {
+        container.style.backgroundColor = 'rgba(0,0,0,0)';
+        backgroundOpacity = 0.1;
+        blackDrawBool = true;
+        rgbDrawBool = false;
+        colorSelectionText.innerHTML = 'Color Selection: Black';
+      });
+      if (blackDrawBool === true) {
+        container.style.backgroundColor = `rgba(0,0,0,${backgroundOpacity})`;
+        backgroundOpacity += 0.1;
+      } else if (rgbDrawBool === true) {
+        container.style.backgroundColor = `rgba(${randomColor()},${randomColor()},${randomColor()},1)`;
+      }
     });
-    button.addEventListener('click', () => {
+    clearGrid.addEventListener('click', () => {
       container.style.backgroundColor = 'rgba(0,0,0,0)';
       backgroundOpacity = 0.1;
     });
@@ -127,14 +153,15 @@ function main() {
   paintContainers();
   const slider = document.querySelector('.slider');
   slider.addEventListener('input', (e) => {
+    const colorSelectionText = document.querySelector('.color-selection');
     const squaredInput = e.target.value * e.target.value;
     resizeGrid(squaredInput);
     paintContainers();
+    colorSelectionText.innerHTML = 'Color Selection: Black';
   });
 }
 
 main();
 
-// TODO: Rainbow button
 // TODO: Take closer look at borderHandler to possibly optimize better.
 // TODO: Add button to toggle grid on and off.

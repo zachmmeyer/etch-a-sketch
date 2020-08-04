@@ -52,3 +52,13 @@
 .bottom-side {
   border-bottom: 2px solid black;
 }
+
+.buttons {
+  width: 600px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.button {
+  justify-self: center;
+}
