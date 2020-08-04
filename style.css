@@ -57,6 +57,7 @@
   width: 600px;
   display: grid;
   grid-template-columns: auto auto auto;
+  margin: 16px;
 }
 
 .button {
