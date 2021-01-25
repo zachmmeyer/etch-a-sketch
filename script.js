@@ -1,24 +1,71 @@
+let rgbDrawBool = false;
+let blackDrawBool = true;
+const colorSelectionText = document.querySelector('.color-selection');
+
+const clearGrid = document.querySelector('.clear-grid');
+clearGrid.addEventListener('click', () => {
+  const containers = document.querySelectorAll('.individual-container');
+  for (const container of containers) {
+    container.style.backgroundColor = 'rgba(0,0,0,0)';
+    backgroundOpacity = 0.1;
+  }
+});
+
+const rgbDraw = document.querySelector('.rainbow-draw');
+rgbDraw.addEventListener('click', () => {
+  colorSelectionText.innerHTML = 'Color Selection: Rainbow';
+  const containers = document.querySelectorAll('.individual-container');
+  for (const container of containers) {
+    container.style.backgroundColor = 'rgba(0,0,0,0)';
+    container.dataset.backgroundOpacity = 0;
+  }
+  blackDrawBool = false;
+  rgbDrawBool = true;
+  
+});
+
+const blackDraw = document.querySelector('.black-draw');
+blackDraw.addEventListener('click', () => {
+  const containers = document.querySelectorAll('.individual-container');
+  for (const container of containers) {
+    container.style.backgroundColor = 'rgba(0,0,0,0)';
+    container.dataset.backgroundOpacity = 0;
+  }
+  blackDrawBool = true;
+  rgbDrawBool = false;
+  colorSelectionText.innerHTML = 'Color Selection: Black';
+});
+
+function paintContainers() {
+  const containers = document.querySelectorAll('.individual-container');
+  for (const container of containers) {
+    container.dataset.backgroundOpacity = 0;
+    container.addEventListener('mouseover', () => {
+      if (blackDrawBool === true) {
+        container.dataset.backgroundOpacity = Number(container.dataset.backgroundOpacity) + 0.1;
+        container.style.backgroundColor = `rgba(0,0,0,${container.dataset.backgroundOpacity})`;
+      } else if (rgbDrawBool === true) {
+        container.style.backgroundColor = `rgba(${randomColor()},${randomColor()},${randomColor()},1)`;
+      }
+    });
+  }
+}
+
 function generateContainers(gridSize, sketchContainer, individualContainer) {
   for (let i = 0; i < gridSize; i += 1) {
-    sketchContainer.appendChild(individualContainer.cloneNode(true));
-    const SKETCHCONTAINER = sketchContainer.childNodes[i].classList;
-    SKETCHCONTAINER.add(`${i}`);
-    switch (true) {
-      case SKETCHCONTAINER.contains('0'):
-        SKETCHCONTAINER.add('top-left-corner');
-        break;
-      case SKETCHCONTAINER.contains(gridSize - 1):
-        SKETCHCONTAINER.add('bottom-right-corner');
-        break;
-      case SKETCHCONTAINER.contains(gridSize - Math.sqrt(gridSize)):
-        SKETCHCONTAINER.add('bottom-left-corner');
-        break;
-      case SKETCHCONTAINER.contains(Math.sqrt(gridSize) - 1):
-        SKETCHCONTAINER.add('top-right-corner');
-        break;
-      default:
-        break;
-    }
+    sketchContainer.appendChild(individualContainer.cloneNode());
+    const sketchContainerClassList = sketchContainer.childNodes[i].classList;
+    sketchContainerClassList.add(`${i}`);
+
+    if (sketchContainerClassList.contains('0')) {
+      sketchContainerClassList.add('top-left-corner');
+    } else if (sketchContainerClassList.contains(gridSize - 1)) {
+      sketchContainerClassList.add('bottom-right-corner');
+    } else if (sketchContainerClassList.contains(gridSize - Math.sqrt(gridSize))) {
+      sketchContainerClassList.add('bottom-left-corner');
+    } else if (sketchContainerClassList.contains(Math.sqrt(gridSize) - 1)) {
+      sketchContainerClassList.add('top-right-corner')
+    };
   }
 }
 
@@ -61,23 +108,23 @@ function borderHandler(gridSize, sketchContainer) {
     }
   }
   for (let i = 0; i < gridSizeRt; i += 1) {
-    const SKETCHCONTAINER = sketchContainer.childNodes[i].classList;
+    const sketchContainerClassList = sketchContainer.childNodes[i].classList;
     if (
       i !== 0
       && i !== gridSizeRt
-      && !SKETCHCONTAINER.contains('top-right-corner')
+      && !sketchContainerClassList.contains('top-right-corner')
     ) {
-      SKETCHCONTAINER.add('top-side');
+      sketchContainerClassList.add('top-side');
     }
   }
   for (let i = gridSizeMinusOne; i > gridSizeMinusOne - gridSizeRt; i -= 1) {
-    const SKETCHCONTAINER = sketchContainer.childNodes[i].classList;
+    const sketchContainerClassList = sketchContainer.childNodes[i].classList;
     if (
       i !== gridSize - gridSizeRt
-      && !SKETCHCONTAINER.contains('bottom-right-corner')
-      && !SKETCHCONTAINER.contains('bottom-left-corner')
+      && !sketchContainerClassList.contains('bottom-right-corner')
+      && !sketchContainerClassList.contains('bottom-left-corner')
     ) {
-      SKETCHCONTAINER.add('bottom-side');
+      sketchContainerClassList.add('bottom-side');
     }
   }
 }
@@ -109,43 +156,8 @@ function randomColor() {
   return Math.floor(Math.random() * 256);
 }
 
-function paintContainers() {
-  let rgbDrawBool = false;
-  let blackDrawBool = true;
-  const containers = document.querySelectorAll('.individual-container');
-  const clearGrid = document.querySelector('.clear-grid');
-  const rgbDraw = document.querySelector('.rainbow-draw');
-  const blackDraw = document.querySelector('.black-draw');
-  const colorSelectionText = document.querySelector('.color-selection');
-  for (const container of containers) {
-    let backgroundOpacity = 0.1;
-    container.addEventListener('mouseover', () => {
-      rgbDraw.addEventListener('click', () => {
-        colorSelectionText.innerHTML = 'Color Selection: Rainbow';
-        container.style.backgroundColor = 'rgba(0,0,0,0)';
-        blackDrawBool = false;
-        rgbDrawBool = true;
-      });
-      blackDraw.addEventListener('click', () => {
-        container.style.backgroundColor = 'rgba(0,0,0,0)';
-        backgroundOpacity = 0.1;
-        blackDrawBool = true;
-        rgbDrawBool = false;
-        colorSelectionText.innerHTML = 'Color Selection: Black';
-      });
-      if (blackDrawBool === true) {
-        container.style.backgroundColor = `rgba(0,0,0,${backgroundOpacity})`;
-        backgroundOpacity += 0.1;
-      } else if (rgbDrawBool === true) {
-        container.style.backgroundColor = `rgba(${randomColor()},${randomColor()},${randomColor()},1)`;
-      }
-    });
-    clearGrid.addEventListener('click', () => {
-      container.style.backgroundColor = 'rgba(0,0,0,0)';
-      backgroundOpacity = 0.1;
-    });
-  }
-}
+
+
 
 function main() {
   const gridSize = 16;
